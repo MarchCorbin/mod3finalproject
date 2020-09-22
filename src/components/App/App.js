@@ -24,10 +24,10 @@ class App extends Component {
     this.setState({orders: [...this.state.orders, newOrder]})
   }
 
-    removeOrder = (id) => {
-      let filtered = this.state.orders.filter(order => order.id !== id)
-      this.setState({orders: filtered})
-    }
+    // removeOrder = (id) => {
+    //   let filtered = this.state.orders.filter(order => order.id !== id)
+    //   this.setState({orders: filtered})
+    // }
 
   render() {
     return (
