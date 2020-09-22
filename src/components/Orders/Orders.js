@@ -13,7 +13,7 @@ const Orders = (props) => {
             return <li>{ingredient}</li>
           })}
         </ul>
-        <button onClick={props.removeOrder(order.id)}>Delete</button>
+        <button onClick={() => props.removeOrder(order.id)}>Delete</button>
       </div>
     )
   });
