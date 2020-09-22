@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {placeOrder, getOrders} from '../../apiCalls.js'
 
 class OrderForm extends Component {
   constructor(props) {
@@ -6,18 +7,42 @@ class OrderForm extends Component {
     this.props = props;
     this.state = {
       name: '',
-      ingredients: []
+      ingredients: [],
     };
   }
 
 
   handleSubmit = e => {
     e.preventDefault();
-    this.clearInputs();
+    if(this.state.ingredients !== [] && this.state.name !== ''){
+      let title = this.state.name
+      let ingres = [...new Set(this.state.ingredients)]
+      let newOrder = {
+        id: Date.now(),
+        name: title,
+        ingredients: ingres
+      }
+      placeOrder(title, ingres);
+      this.props.updateState(newOrder)
+      console.log(newOrder, 'newordering')
+      this.clearInputs();
+    }
+  }
+
+  handleNameChange = e => {
+    this.setState({ name: e.target.value})
   }
 
   clearInputs = () => {
     this.setState({name: '', ingredients: []});
+  }
+
+  handleIngredientChange = (e) => {
+    e.preventDefault()
+    let allIngredients = [...this.state.ingredients]
+   allIngredients.push(e.target.name)
+    this.setState({ingredients: allIngredients})
+    console.log(allIngredients, 'allingredients')
   }
 
   render() {
